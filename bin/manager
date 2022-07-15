@@ -80,13 +80,13 @@ function clear-compiled()
 {
   echo -e "${On_Green}Removing compiled code...${Color_Off}"
   echo -e "Removing generated/* directory"
-  $BUILD_CONTAINER rm -rf generated/*
+  $DEPLOY_CONTAINER rm -rf generated/*
 }
 
 function clear-static()
 {
   echo -e "${On_Green}Clear static content...${Color_Off}"
-  $BUILD_CONTAINER rm -rf var/cache/* var/page_cache/* var/view_preprocessed/* pub/static/*
+  $DEPLOY_CONTAINER rm -rf var/cache/* var/page_cache/* var/view_preprocessed/* pub/static/*
 }
 
 function clear-cache()
@@ -224,20 +224,20 @@ case "$1" in
     bin/magento-docker ${*:2}
     ;;
   composer)
-    $BUILD_CONTAINER composer ${*:2}
+    $DEPLOY_CONTAINER composer ${*:2}
     ;;
   cs)
-    $BUILD_CONTAINER ./vendor/bin/phpcs ${*:2}
+    $DEPLOY_CONTAINER ./vendor/bin/phpcs ${*:2}
     ;;
   cbf)
-    $BUILD_CONTAINER ./vendor/bin/phpcbf ${*:2}
+    $DEPLOY_CONTAINER ./vendor/bin/phpcbf ${*:2}
     ;;
   ece-docker)
-    $BUILD_CONTAINER ./vendor/bin/ece-docker ${*:2}
+    $DEPLOY_CONTAINER ./vendor/bin/ece-docker ${*:2}
     process-domain $@
     ;;
   cloud-build)
-    $BUILD_CONTAINER cloud-build ${*:2}
+    $DEPLOY_CONTAINER cloud-build ${*:2}
     ;;
   cloud-deploy)
     $DEPLOY_CONTAINER cloud-deploy ${*:2}
@@ -246,7 +246,7 @@ case "$1" in
     $DEPLOY_CONTAINER cloud-post-deploy ${*:2}
     ;;
   ece-tools)
-    $BUILD_CONTAINER ece-command ${*:2}
+    $DEPLOY_CONTAINER ece-command ${*:2}
     ;;
   magento-command)
     $DEPLOY_CONTAINER magento-command ${*:2}
